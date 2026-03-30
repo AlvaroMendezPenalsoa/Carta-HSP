@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HSP · Arrocería y Catering</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Raleway:wght@300;400;500;600&display=swap');
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:#0a1628;color:#e8dcc8;font-family:'Raleway',sans-serif;min-height:100vh;overflow-x:hidden}
+  .hero{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem}
+  .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 80%,rgba(30,60,100,.4),transparent 60%),radial-gradient(ellipse at 20% 30%,rgba(20,50,90,.3),transparent 50%)}
+  .octopus-bg{position:absolute;bottom:-8%;right:-4%;width:52%;opacity:.08;pointer-events:none}
+  .octopus-bg svg{width:100%;height:auto}
+  .brand{position:relative;z-index:1;margin-bottom:1rem}
+  .brand h1{font-family:'Playfair Display',serif;font-size:5rem;letter-spacing:.15em;color:#f0e6d3;text-shadow:0 0 60px rgba(200,170,120,.15)}
+  .brand p{font-family:'Playfair Display',serif;font-style:italic;font-size:1.15rem;letter-spacing:.25em;color:#a89880;margin-top:.3rem}
+  .divider{width:80px;height:1px;background:linear-gradient(90deg,transparent,#8a7a64,transparent);margin:2rem auto}
+  .menu{position:relative;z-index:1;max-width:700px;width:100%;padding:0 1.5rem}
+  .section{margin-bottom:2.5rem}
+  .section-title{font-family:'Playfair Display',serif;font-size:1rem;letter-spacing:.35em;text-transform:uppercase;color:#c4a76c;margin-bottom:1.5rem;display:flex;align-items:center;gap:1rem}
+  .section-title::before,.section-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,#3a3020,transparent)}
+  .dish{padding:.65rem 0;display:flex;justify-content:space-between;align-items:baseline;gap:1rem;border-bottom:1px solid rgba(200,170,120,.06)}
+  .dish:last-child{border-bottom:none}
+  .dish-name{font-size:.92rem;letter-spacing:.06em;font-weight:400;color:#e0d4c0}
+  .badge{display:inline-block;font-size:.55rem;letter-spacing:.15em;text-transform:uppercase;padding:2px 8px;border-radius:2px;margin-left:.6rem;vertical-align:middle;font-weight:600}
+  .badge.esp{background:rgba(196,167,108,.15);color:#c4a76c;border:1px solid rgba(196,167,108,.3)}
+  .badge.new{background:rgba(120,180,160,.12);color:#78b4a0;border:1px solid rgba(120,180,160,.25)}
+  .footer{position:relative;z-index:1;text-align:center;padding:2rem 1.5rem 3rem;max-width:600px;margin:0 auto}
+  .footer .note{font-size:.82rem;color:#a89880;line-height:1.8;letter-spacing:.04em}
+  .contact{margin-top:1.8rem;display:flex;flex-wrap:wrap;justify-content:center;gap:1.5rem}
+  .contact a{display:inline-flex;align-items:center;gap:.5rem;background:rgba(196,167,108,.08);border:1px solid rgba(196,167,108,.2);color:#c4a76c;padding:.6rem 1.4rem;border-radius:4px;text-decoration:none;font-size:.8rem;letter-spacing:.08em;transition:all .3s}
+  .contact a:hover{background:rgba(196,167,108,.18);border-color:rgba(196,167,108,.4)}
+  .ig{margin-top:1.5rem}
+  .ig a{color:#8a7a64;text-decoration:none;font-size:.78rem;letter-spacing:.12em;transition:color .3s}
+  .ig a:hover{color:#c4a76c}
+  .wave{position:fixed;bottom:0;left:0;width:100%;height:120px;pointer-events:none;opacity:.08}
+</style>
+</head>
+<body>
+<div class="hero">
+  <div class="octopus-bg">
+    <svg viewBox="0 0 500 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g stroke="#c4a76c" stroke-width="1.4" fill="none">
+        <!-- Manto superior redondeado -->
+        <path d="M250 30 C180 30 140 70 135 120 C130 165 150 195 175 210 C195 222 230 228 250 228 C270 228 305 222 325 210 C350 195 370 165 365 120 C360 70 320 30 250 30Z"/>
+        <!-- Detalle interior del manto -->
+        <path d="M250 55 C200 55 172 85 170 125 C168 158 185 182 210 192" stroke-width=".7" opacity=".6"/>
+        <path d="M250 55 C300 55 328 85 330 125 C332 158 315 182 290 192" stroke-width=".7" opacity=".6"/>
+        <!-- Cabeza / zona de brazos -->
+        <ellipse cx="250" cy="250" rx="75" ry="42"/>
+        <!-- Unión manto-cabeza -->
+        <path d="M178 215 C182 232 194 244 210 250" stroke-width=".8"/>
+        <path d="M322 215 C318 232 306 244 290 250" stroke-width=".8"/>
+        <!-- Ojos -->
+        <ellipse cx="218" cy="155" rx="18" ry="20"/>
+        <ellipse cx="218" cy="155" rx="10" ry="11" fill="#c4a76c" opacity=".18"/>
+        <circle cx="214" cy="151" r="3" fill="#c4a76c" opacity=".5"/>
+        <ellipse cx="282" cy="155" rx="18" ry="20"/>
+        <ellipse cx="282" cy="155" rx="10" ry="11" fill="#c4a76c" opacity=".18"/>
+        <circle cx="278" cy="151" r="3" fill="#c4a76c" opacity=".5"/>
+        <!-- Tentáculo 1 - izquierda extremo -->
+        <path d="M185 272 C150 310 110 370 90 430 C78 470 85 510 105 505 C120 501 130 470 140 440 C155 400 168 355 178 318"/>
+        <!-- Tentáculo 2 -->
+        <path d="M205 282 C185 325 170 390 172 450 C174 490 190 520 208 515 C222 511 225 480 220 448 C213 405 210 345 215 300"/>
+        <!-- Tentáculo 3 -->
+        <path d="M230 288 C222 335 220 400 228 458 C234 500 250 528 264 522 C276 517 275 488 268 455 C258 410 252 345 252 295"/>
+        <!-- Tentáculo 4 -->
+        <path d="M255 288 C258 338 265 405 275 462 C282 502 298 528 312 520 C324 513 320 482 310 450 C296 408 280 343 270 295"/>
+        <!-- Tentáculo 5 -->
+        <path d="M278 282 C295 325 308 390 305 450 C302 490 288 520 272 517"/>
+        <!-- Tentáculo 6 -->
+        <path d="M298 272 C328 312 360 372 372 432 C381 472 372 510 352 507 C337 504 330 472 325 442 C315 400 300 352 288 315"/>
+        <!-- Tentáculo 7 - más externo izquierda -->
+        <path d="M192 265 C155 295 105 345 75 405 C58 442 62 485 82 482 C96 480 112 450 128 415 C148 370 170 315 186 280"/>
+        <!-- Tentáculo 8 - más externo derecha -->
+        <path d="M308 265 C345 295 395 345 425 405 C442 442 438 485 418 482 C404 480 388 450 372 415 C352 370 330 315 314 280"/>
+        <!-- Ventosas tentáculo izquierdo -->
+        <circle cx="136" cy="345" r="4"/>
+        <circle cx="120" cy="390" r="4"/>
+        <circle cx="107" cy="435" r="3.5"/>
+        <!-- Ventosas tentáculo central -->
+        <circle cx="232" cy="360" r="4"/>
+        <circle cx="234" cy="415" r="4"/>
+        <circle cx="240" cy="465" r="3.5"/>
+        <!-- Ventosas tentáculo derecho -->
+        <circle cx="368" cy="345" r="4"/>
+        <circle cx="382" cy="390" r="4"/>
+        <circle cx="391" cy="435" r="3.5"/>
+      </g>
+    </svg>
+  </div>
+
+  <div class="brand">
+    <h1>HSP</h1>
+    <p>· arrocería y catering ·</p>
+  </div>
+  <div class="divider"></div>
+
+  <div class="menu">
+    <div class="section">
+      <div class="section-title">Arroces de Tierra</div>
+      <div class="dish"><span class="dish-name">Arroz de Secreto Ibérico <span class="badge esp">Especialidad</span></span></div>
+      <div class="dish"><span class="dish-name">Arroz de Secreto Ibérico y Espárragos Trigueros</span></div>
+      <div class="dish"><span class="dish-name">Paella Valenciana <span style="font-style:italic;color:#8a7a64;font-size:.78rem">a nuestra manera</span></span></div>
+      <div class="dish"><span class="dish-name">Arroz de Confit de Pato y Puerro <span class="badge new">Novedad</span></span></div>
+      <div class="dish"><span class="dish-name">Arroz de Chistorra y Pimientos de Padrón</span></div>
+      <div class="dish"><span class="dish-name">Arroz de Pedro Ximénez <span class="badge new">Novedad</span></span></div>
+      <div class="dish"><span class="dish-name">Arroz de Butifarra Blanca <span class="badge new">Novedad</span></span></div>
+    </div>
+    <div class="section">
+      <div class="section-title">Arroces de Mar</div>
+      <div class="dish"><span class="dish-name">Arroz del Senyoret</span></div>
+      <div class="dish"><span class="dish-name">Arroz Negro</span></div>
+      <div class="dish"><span class="dish-name">Arroz de Pulpo con Alcachofa</span></div>
+      <div class="dish"><span class="dish-name">Fideuá de Gambones</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <div class="note">
+    Encargo mínimo para 8 personas · Puede haber suplemento por desplazamiento<br>
+    Se recomienda reservar con la mayor antelación posible · Consultar alérgenos
+  </div>
+  <div class="contact">
+    <a href="tel:+34609636086">Hugo · 609 636 086</a>
+    <a href="tel:+34606962046">Álvaro · 606 962 046</a>
+  </div>
+  <div class="ig"><a href="https://www.instagram.com/eventos_hsp?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank">@eventos_hsp</a></div>
+</div>
+
+<svg class="wave" viewBox="0 0 1440 120" preserveAspectRatio="none"><path d="M0,60 C360,120 720,0 1080,60 C1260,90 1380,40 1440,60 L1440,120 L0,120Z" fill="#c4a76c"/></svg>
+</body>
+</html>
