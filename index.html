@@ -47,7 +47,6 @@
 ║  · Máximo 3 badges "new" a la vez (para que destaquen)       ║
 ║  · Las secciones se renderizan en orden del array             ║
 ║  · Badges permitidos: "esp" (Especialidad), "new" (Novedad)  ║
-║  · Los precios NO se muestran — se consultan por WhatsApp    ║
 ║  · Alérgenos: indicar array por plato (se muestran iconos)   ║
 ║     Valores: gluten, crustaceos, moluscos, pescado,          ║
 ║     huevo, lacteos, soja, frutos_secos, apio, mostaza,       ║
@@ -88,36 +87,42 @@ const CONFIG = {
           desc: "con espárragos trigueros o setas shiitake y judías verdes",
           badge: "esp",
           allergens: [],
+          price: "15€",
         },
         {
           name: "Paella Valenciana",
           desc: "elaborada según la receta tradicional",
           badge: null,
           allergens: [],
+          price: "15€",
         },
         {
           name: "Arroz de Confit de Pato y Puerro",
           desc: "confit de pato desmenuzado y puerro",
           badge: "new",
           allergens: [],
+          price: "16€",
         },
         {
           name: "Arroz de Chistorra y Pimientos de Padrón",
           desc: "con el equilibrio característico de la chistorra y el pimiento",
           badge: null,
           allergens: [],
+          price: "15€",
         },
         {
           name: "Arroz al Pedro Ximénez",
           desc: "con pollo y pimiento rojo, con un ligero toque dulce",
           badge: "new",
           allergens: ["sulfitos"],
+          price: "16€",
         },
         {
           name: "Arroz de Butifarra Blanca",
           desc: "con setas y ajos tiernos",
           badge: "new",
           allergens: [],
+          price: "15€",
         },
       ],
     },
@@ -129,24 +134,28 @@ const CONFIG = {
           desc: "con calamar y gambas, terminado con ajo y perejil",
           badge: null,
           allergens: ["crustaceos", "moluscos"],
+          price: "15€",
         },
         {
           name: "Arroz Negro",
           desc: "con sepia y gambones, ligado con su tinta",
           badge: null,
           allergens: ["moluscos", "crustaceos"],
+          price: "15€",
         },
         {
           name: "Arroz de Pulpo con Alcachofa",
           desc: "pulpo y alcachofa en una combinación equilibrada",
           badge: null,
           allergens: ["moluscos"],
+          price: "17€",
         },
         {
           name: "Fideuá de Gambones",
           desc: "con fideo fino y gambones",
           badge: null,
           allergens: ["gluten", "crustaceos"],
+          price: "15€",
         },
       ],
     },
@@ -189,7 +198,6 @@ const ALLERGEN_ICONS = {
     min-height: 100vh;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
-    /* Prevent tap highlight on iOS */
     -webkit-tap-highlight-color: transparent;
   }
 
@@ -238,7 +246,7 @@ const ALLERGEN_ICONS = {
   .divider-diamond { width: 5px; height: 5px; border: 1px solid rgba(196,167,108,.4); transform: rotate(45deg) }
 
   /* ── MENÚ CONTENEDOR ── */
-  .menu { position: relative; z-index: 1; max-width: 660px; width: 100%; padding: 0 1rem }
+  .menu { position: relative; z-index: 1; max-width: 660px; width: 100%; padding: 0 1rem; margin: 0 auto }
 
   /* ── SECCIONES ── */
   .section { margin-bottom: 2rem }
@@ -255,12 +263,10 @@ const ALLERGEN_ICONS = {
 
   /* ── PLATOS ── */
   .dish {
-    /* Área táctil mínima 44px — padding generoso */
     padding: .9rem 0;
     display: flex; justify-content: space-between;
     align-items: flex-start; gap: .8rem; text-align: left;
     position: relative;
-    /* Active state en vez de hover para táctil */
     transition: background .15s;
     margin: 0 -.5rem; padding-left: .5rem; padding-right: .5rem;
     border-radius: 4px;
@@ -285,6 +291,16 @@ const ALLERGEN_ICONS = {
   .dish-allergens {
     display: inline-flex; gap: .3rem; margin-left: .4rem;
     font-size: .8rem; vertical-align: middle;
+  }
+
+  /* ── PRECIO ── */
+  .dish-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: .95rem; font-weight: 400;
+    color: var(--gold); white-space: nowrap;
+    letter-spacing: .03em;
+    flex-shrink: 0;
+    padding-top: .1rem;
   }
 
   /* ── BADGES — legibles en móvil ── */
@@ -315,7 +331,7 @@ const ALLERGEN_ICONS = {
   /* ── FOOTER ── */
   footer {
     position: relative; z-index: 1; text-align: center;
-    padding: .8rem 1.2rem 6rem; /* 6rem bottom = espacio para CTA flotante */
+    padding: .8rem 1.2rem 6rem;
     max-width: 600px; margin: 0 auto;
   }
   .footer-divider { width: 40px; height: 1px; background: rgba(196,167,108,.25); margin: 0 auto 1.5rem }
@@ -331,30 +347,27 @@ const ALLERGEN_ICONS = {
   }
   .info-item svg { opacity: .5; flex-shrink: 0 }
 
-  .price-label {
-    font-family: 'Cormorant Garamond', serif; font-size: .92rem;
-    letter-spacing: .25em; text-transform: uppercase;
-    color: var(--gold); opacity: .7; margin-top: 1.5rem; margin-bottom: .2rem;
+  /* ── CTA PEDIDO — touch-friendly ── */
+  .order-cta {
+    margin-top: 1.5rem; display: flex; justify-content: center;
   }
-
-  /* ── CONTACT BUTTONS — touch-friendly 44px+ height ── */
-  .contact { margin-top: 1.2rem; display: flex; flex-direction: column; align-items: center; gap: .8rem }
-  .contact a {
-    display: flex; align-items: center; justify-content: center; gap: .5rem;
-    background: transparent; border: 1px solid rgba(196,167,108,.22);
-    color: var(--gold); padding: .85rem 1.6rem; border-radius: 4px;
-    text-decoration: none; font-size: .82rem; letter-spacing: .08em;
-    width: 100%; max-width: 280px;
-    min-height: 48px; /* Touch target */
+  .order-cta a {
+    display: flex; align-items: center; justify-content: center; gap: .6rem;
+    background: rgba(196,167,108,.08); border: 1px solid rgba(196,167,108,.3);
+    color: var(--gold); padding: 1rem 2rem; border-radius: 4px;
+    text-decoration: none; font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem; letter-spacing: .15em; text-transform: uppercase;
+    font-weight: 400;
+    min-height: 52px;
     transition: background .15s;
   }
-  .contact a:active { background: rgba(196,167,108,.08) }
+  .order-cta a:active { background: rgba(196,167,108,.15) }
 
   .ig { margin-top: 1.5rem }
   .ig a {
     color: var(--muted); text-decoration: none; font-size: .8rem;
     letter-spacing: .1em; display: inline-flex; align-items: center; gap: .5rem;
-    min-height: 44px; /* Touch target */
+    min-height: 44px;
   }
   .ig a:active { color: var(--gold-light) }
 
@@ -369,7 +382,6 @@ const ALLERGEN_ICONS = {
   }
   .float-cta:active { transform: scale(.93) }
   .float-cta .paella-svg { width: 100%; height: 100%; transform: rotate(-45deg) }
-  /* Steam wisps */
   .float-cta .steam {
     position: absolute; top: 2px; width: 2px; height: 10px;
     background: rgba(255,255,255,.2); border-radius: 2px;
@@ -394,7 +406,6 @@ const ALLERGEN_ICONS = {
   /* DESKTOP ENHANCEMENTS (min-width: 600px)    */
   /* ═══════════════════════════════════════════ */
   @media (min-width: 600px) {
-    /* Ambient glows — solo en desktop */
     .ambient { display: block; position: fixed; inset: 0; pointer-events: none; z-index: 0 }
     .ambient .g1 {
       position: absolute; width: 600px; height: 600px; top: -10%; right: -8%;
@@ -415,58 +426,49 @@ const ALLERGEN_ICONS = {
     @keyframes d2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(20px,-30px)} }
     @keyframes d3 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-20px,-20px)} }
 
-    /* Octopus — visible en desktop */
     .octopus-bg {
       display: block; position: absolute; bottom: -6%; right: -2%; width: 46%;
       opacity: .045; pointer-events: none;
     }
     .octopus-bg svg { width: 100%; height: auto }
 
-    /* Hero más espacioso */
     .hero {
       min-height: 100vh; justify-content: center;
       padding: 3rem 2rem;
     }
 
-    /* Brand más grande */
     .brand h1 { font-size: clamp(3.5rem, 10vw, 6rem); letter-spacing: .22em }
     .brand .subtitle { font-size: 1.15rem; letter-spacing: .32em }
 
-    /* Divider más ancho */
     .divider-wrap { margin: 2rem auto 2.5rem }
     .divider-line { width: 60px }
 
-    /* Menu */
     .menu { padding: 0 1.5rem }
     .section { margin-bottom: 3rem }
     .section:last-child { margin-bottom: 1rem }
     .section-title { font-size: 1.05rem; letter-spacing: .4em; margin-bottom: 1.4rem }
 
-    /* Hover effects — solo desktop */
     .dish { margin: 0; padding-left: 0; padding-right: 0; border-radius: 0 }
     .dish:hover { transform: translateX(4px) }
     .dish:hover .dish-name { color: var(--cream) }
 
-    /* Footer layout horizontal */
-    .info-grid { flex-direction: row; flex-wrap: wrap; gap: .6rem 1.4rem }
-    .contact { flex-direction: row; gap: 1rem }
-    .contact a { width: auto; max-width: none }
+    .info-grid { flex-direction: row; flex-wrap: wrap; gap: .6rem 1.4rem; justify-content: center }
 
-    /* Hover en botones */
-    .contact a {
+    .order-cta a {
       position: relative; overflow: hidden;
       transition: all .4s cubic-bezier(.25,.46,.45,.94);
     }
-    .contact a::before {
+    .order-cta a::before {
       content: ''; position: absolute; inset: 0;
       background: rgba(196,167,108,.06); transform: scaleX(0);
       transform-origin: left; transition: transform .4s cubic-bezier(.25,.46,.45,.94);
     }
-    .contact a:hover::before { transform: scaleX(1) }
-    .contact a:hover {
-      border-color: rgba(196,167,108,.4); transform: translateY(-1px);
-      box-shadow: 0 4px 20px rgba(196,167,108,.08);
+    .order-cta a:hover::before { transform: scaleX(1) }
+    .order-cta a:hover {
+      border-color: rgba(196,167,108,.5); transform: translateY(-1px);
+      box-shadow: 0 4px 20px rgba(196,167,108,.12);
     }
+
     .ig a:hover { color: var(--gold-light); letter-spacing: .14em }
 
     footer { padding-bottom: 4rem }
@@ -475,10 +477,6 @@ const ALLERGEN_ICONS = {
 </style>
 </head>
 <body>
-
-<!-- ═══════════════════════════════════════════ -->
-<!-- 3. ESTRUCTURA HTML                         -->
-<!-- ═══════════════════════════════════════════ -->
 
 <!-- Ambient glows (decorative, desktop only) -->
 <div class="ambient" aria-hidden="true">
@@ -540,14 +538,10 @@ const ALLERGEN_ICONS = {
   <span class="steam"></span>
   <span class="steam"></span>
   <svg class="paella-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-    <!-- Pan handles (semicircle) -->
     <path d="M8,40 A10,10 0 0,0 8,56" fill="none" stroke="#a08040" stroke-width="4" stroke-linecap="round"/>
     <path d="M92,40 A10,10 0 0,1 92,56" fill="none" stroke="#a08040" stroke-width="4" stroke-linecap="round"/>
-    <!-- Pan outer rim -->
     <circle cx="50" cy="50" r="42" fill="#5a4828" stroke="#70593a" stroke-width="1.5"/>
-    <!-- Inner rice area (green = WhatsApp brand) -->
     <circle cx="50" cy="50" r="36" fill="#25d366"/>
-    <!-- Subtle rice texture dots -->
     <circle cx="28" cy="36" r="1.2" fill="rgba(255,255,200,.25)"/>
     <circle cx="72" cy="40" r="1" fill="rgba(255,255,200,.2)"/>
     <circle cx="35" cy="68" r="1.1" fill="rgba(255,255,200,.2)"/>
@@ -556,7 +550,6 @@ const ALLERGEN_ICONS = {
     <circle cx="76" cy="55" r="1" fill="rgba(255,255,200,.18)"/>
     <circle cx="40" cy="28" r="1" fill="rgba(255,255,200,.15)"/>
     <circle cx="60" cy="73" r=".8" fill="rgba(255,255,200,.15)"/>
-    <!-- WhatsApp icon (centered, scaled) -->
     <g transform="translate(50,50) rotate(45) scale(1.35) translate(-12,-12)">
       <path fill="white" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
     </g>
@@ -571,11 +564,13 @@ const ALLERGEN_ICONS = {
 </div>
 
 <!-- ═══════════════════════════════════════════ -->
-<!-- 4. RENDER ENGINE — No tocar salvo refactor -->
+<!-- 4. RENDER ENGINE                           -->
 <!-- ═══════════════════════════════════════════ -->
 <script>
 (function render() {
   const C = CONFIG;
+  const waMsg = encodeURIComponent('\u00a1Hola! Me gustar\u00eda hacer un pedido \ud83c\udf5a\n\nComensales: \nFecha: \nLugar: \nArroz: \nObservaciones: ');
+  const waUrl = `https://wa.me/${C.contacts[1].phone}?text=${waMsg}`;
 
   /* Brand */
   document.getElementById('brand-name').textContent = C.brand.name;
@@ -595,15 +590,17 @@ const ALLERGEN_ICONS = {
         : '';
       const allergenHtml = d.allergens && d.allergens.length
         ? `<span class="dish-allergens">${d.allergens.map(a =>
-            `<span title="${a}">${ALLERGEN_ICONS[a] || '⚠️'}</span>`
+            `<span title="${a}">${ALLERGEN_ICONS[a] || '\u26a0\ufe0f'}</span>`
           ).join('')}</span>`
         : '';
+      const priceHtml = d.price ? `<span class="dish-price">${d.price}</span>` : '';
       html += `
         <div class="dish">
           <span class="dish-name">
             ${d.name} ${badgeHtml} ${allergenHtml}
             <span class="dish-desc">${d.desc}</span>
           </span>
+          ${priceHtml}
         </div>`;
     });
     sectionEl.innerHTML = html;
@@ -614,7 +611,7 @@ const ALLERGEN_ICONS = {
   const footerEl = document.getElementById('footer-container');
   footerEl.innerHTML = `
     <div class="allergen-legend">
-      🦐 🌾 = contiene alérgeno
+      \ud83e\udd90 \ud83c\udf3e = contiene al\u00e9rgeno
     </div>
     <div class="footer-divider"></div>
     <div class="info-grid">
@@ -631,11 +628,11 @@ const ALLERGEN_ICONS = {
         ${C.info.reservaTexto}
       </div>
     </div>
-    <div class="price-label">Para consultar precio</div>
-    <div class="contact">
-      ${C.contacts.map(c =>
-        `<a href="https://wa.me/${c.phone}" target="_blank" aria-label="Contactar con ${c.name} por WhatsApp"><span>${c.name} · ${c.display}</span></a>`
-      ).join('')}
+    <div class="order-cta">
+      <a href="${waUrl}" target="_blank" aria-label="Haz tu pedido por WhatsApp">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" opacity=".8"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Haz tu pedido aqu\u00ed
+      </a>
     </div>
     <div class="ig">
       <a href="${C.instagram.url}" target="_blank" aria-label="Instagram de HSP">
@@ -644,8 +641,8 @@ const ALLERGEN_ICONS = {
       </a>
     </div>`;
 
-  /* Floating CTA → Álvaro */
-  document.getElementById('float-cta').href = `https://wa.me/${C.contacts[1].phone}`;
+  /* Floating CTA */
+  document.getElementById('float-cta').href = waUrl;
 })();
 </script>
 
