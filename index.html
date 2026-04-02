@@ -43,7 +43,7 @@
 ║  · Octopus SVG oculto en pantallas < 600px                   ║
 ║                                                              ║
 ║  REGLAS DE NEGOCIO:                                          ║
-║  · Mínimo 8 personas por encargo                             ║
+║  · Mínimo 8 comensales en delivery, 20 en showcooking      ║
 ║  · Máximo 3 badges "new" a la vez (para que destaquen)       ║
 ║  · Las secciones se renderizan en orden del array             ║
 ║  · Badges permitidos: "esp" (Especialidad), "new" (Novedad)  ║
@@ -66,15 +66,16 @@ const CONFIG = {
   },
   contacts: [
     { name: "Hugo",   phone: "34609636086", display: "609 636 086" },
-    { name: "Álvaro Méndez", phone: "34606962046", display: "606 962 046" },
+    { name: "Álvaro", phone: "34606962046", display: "606 962 046" },
   ],
   instagram: {
     handle: "@eventos_hsp",
     url: "https://www.instagram.com/eventos_hsp",
   },
   info: {
-    minPersonas: 8,
-    reservaTexto: "Reservar con antelación",
+    minDelivery: 8,
+    minShowcooking: 20,
+    reservaTexto: "Se ruega reservar con la mayor antelación posible",
     alergenosTexto: "Consultar alérgenos",
   },
   /* ── CARTA — Añadir/quitar/reordenar aquí ── */
@@ -613,21 +614,21 @@ const ALLERGEN_ICONS = {
   const footerEl = document.getElementById('footer-container');
   footerEl.innerHTML = `
     <div class="allergen-legend">
-      🦐 🌾 = contiene alérgeno · consultar detalle
+      🦐 🌾 = contiene alérgeno
     </div>
     <div class="footer-divider"></div>
     <div class="info-grid">
       <div class="info-item">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-        Encargo mínimo para ${C.info.minPersonas} personas
+        Delivery a partir de ${C.info.minDelivery} comensales
+      </div>
+      <div class="info-item">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Showcooking a partir de ${C.info.minShowcooking} comensales
       </div>
       <div class="info-item">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
         ${C.info.reservaTexto}
-      </div>
-      <div class="info-item">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        ${C.info.alergenosTexto}
       </div>
     </div>
     <div class="price-label">Para consultar precio</div>
@@ -643,7 +644,7 @@ const ALLERGEN_ICONS = {
       </a>
     </div>`;
 
-  /* Floating CTA → Álvaro Méndez */
+  /* Floating CTA → Álvaro */
   document.getElementById('float-cta').href = `https://wa.me/${C.contacts[1].phone}`;
 })();
 </script>
